@@ -1,0 +1,65 @@
+<head>
+<meta charset="UTF-8" />
+<title>AI Hallucination Detector</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🧠 AI Hallucination Detector</h1>
+      <p class="subtitle">Ask a question → LLM answers → every claim gets fact-checked against trusted sources</p>
+    </header>
+
+    <div class="chat-box">
+      <input id="questionInput" type="text" placeholder="e.g. Who won FIFA 2022? What is the capital of India?" />
+      <button id="askBtn">Ask</button>
+    </div>
+
+    <div id="loading" class="loading hidden">Thinking &amp; verifying... ⏳</div>
+
+    <div id="result" class="result hidden">
+      <div class="card">
+        <h2>Question</h2>
+        <p id="qText"></p>
+      </div>
+
+      <div class="card">
+        <h2>Raw LLM Answer</h2>
+        <p id="aText"></p>
+      </div>
+
+      <div class="card score-card">
+        <h2>Hallucination Score</h2>
+        <div class="meter-wrap">
+          <div class="meter">
+            <div id="meterFill" class="meter-fill"></div>
+          </div>
+          <span id="scoreLabel" class="score-label">--%</span>
+        </div>
+        <p id="overallStatus" class="overall-status"></p>
+      </div>
+
+      <div class="card">
+        <h2>Confidence Graph (per claim)</h2>
+        <canvas id="claimChart" height="120"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>Claim-by-Claim Breakdown</h2>
+        <div id="claimsList"></div>
+      </div>
+    </div>
+
+    <div class="card history-card">
+      <h2>History</h2>
+      <button id="refreshHistory">Refresh</button>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
